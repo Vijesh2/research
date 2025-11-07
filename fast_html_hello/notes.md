@@ -1,0 +1,23 @@
+## Notes
+
+- Created project folder `fast_html_hello` to hold the Fast HTML hello-world example.
+- Attempted to `pip install fast-html`, but the package is not accessible in this environment (403 from proxy / package not found).
+- Planning to add a simple `app.py` script that constructs an HTML document with the `fast_html` package and prints it to stdout.
+- Added `app.py` with a `build_page` helper and runtime guard that reminds readers to install `fast-html`.
+- Wrote a README with usage instructions and a sample output snippet for quick testing.
+- Confirmed that running `python app.py` exits with a helpful error message until `fast-html` is installed.
+- Reworked `app.py` to auto-detect the real `fast-html` package via `importlib.util.find_spec` so we can avoid try/except imports.
+- Added a lightweight fallback tag renderer that mimics the small feature set required by the demo, ensuring `python app.py` now prints HTML even without third-party dependencies.
+- Updated the README sample output to match the pretty-printed fallback renderer output and documented the new behaviour.
+- Verified that `python app.py` succeeds and emits the expected HTML markup using the fallback implementation.
+- Re-read the FastHTML docs and replaced the fallback renderer with direct imports from `fasthtml.common` to match the intended usage.
+- Tried installing `python-fasthtml`, but the proxy still blocks outbound PyPI requests (403 Forbidden).
+- Added an explicit dependency guard in `app.py` that instructs the reader to `pip install python-fasthtml` when the import fails.
+- Updated the README to point to the python-fasthtml package, refreshed the example output, and noted the new dependency.
+- Simplified `app.py` to use the canonical `fasthtml.common` primitives directly with a minimal `main` function.
+- Verified the script still exits with a clear dependency message when `python-fasthtml` is not installed.
+- Noticed the repo-level `requirements.txt` is shared with other tooling, so added a local `requirements.txt` in this folder instead.
+- Reintroduced a dependency-free path by bundling a minimal subset of the FastHTML API in `fasthtml_fallback.py` so the script can execute in offline environments.
+- Updated `app.py` to prefer the real `fasthtml.common` module but automatically switch to the fallback with a clear stderr notice.
+- Refreshed the README with the new fallback behaviour and regenerated the sample HTML output to include the doctype and indentation emitted by the renderer.
+- Verified the example runs cleanly without external dependencies via `/usr/bin/python3 app.py`.
