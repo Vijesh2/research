@@ -115,6 +115,5 @@ for dirname, commit_date in subdirs_with_dates:
     print()  # Add blank line between entries
 
 ]]]-->
-
 <!--[[[end]]]-->
 
